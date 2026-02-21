@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PolakOnTop</title>
+  <style>
+    body {
+      margin:0; height:100vh; background:#000; color:#0f0; font-family:Arial,monospace;
+      overflow:hidden; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(black, #0a0a1f);
+    }
+    .container {
+      text-align:center; position:relative; z-index:10;
+    }
+    h1 {
+      font-size:9vw; margin:0; letter-spacing:0.5vw;
+      background: linear-gradient(90deg, #00ff41, #00b7ff, #ff00aa, #00ff41);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent; animation: glitch 4s infinite;
+    }
+    @keyframes glitch {
+      0%,100% { transform: translate(0); }
+      20% { transform: translate(-4px, 4px); }
+      40% { transform: translate(4px, -4px); }
+      60% { transform: translate(-4px, 0); }
+      80% { transform: translate(4px, 4px); }
+    }
+    .discord {
+      margin-top:40px; font-size:2rem;
+    }
+    .discord a {
+      color:#00ff9d; text-decoration:none; border-bottom:2px solid #00ff9d;
+      transition:0.3s;
+    }
+    .discord a:hover { color:#fff; border-color:#fff; }
+    canvas { position:absolute; top:0; left:0; z-index:1; }
+  </style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
+  <h1>Polak</h1>
+  <div class="discord">
+    Rejoins la team → <a href="https://discord.gg/xW3r7FTxc2" target="_blank">discord.gg/xW3r7FTxc2</a>
+  </div>
+</div>
+
+<script>
+// fond particules simple (optionnel mais stylé)
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for(let i=0; i<80; i++){
+  particles.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    vx: (Math.random()-0.5)*1.2,
+    vy: (Math.random()-0.5)*1.2,
+    radius: Math.random()*2+1
+  });
+}
+
+function animate(){
+  ctx.fillStyle = 'rgba(0,0,0,0.05)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if(p.x<0||p.x>canvas.width) p.vx*=-1;
+    if(p.y<0||p.y>canvas.height) p.vy*=-1;
+    
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+    ctx.fillStyle = '#00ff4144';
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener('resize',()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
