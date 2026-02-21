@@ -7,54 +7,56 @@
   <style>
     body {
       margin:0; padding:0; min-height:100vh; background:#0a0015; color:#d0a0ff;
-      font-family:'Courier New',monospace; overflow-y:scroll; scroll-behavior:smooth;
+      font-family:'Courier New',monospace; overflow-y:auto; scroll-behavior:smooth;
     }
     nav {
-      position:fixed; top:0; left:0; right:0; background:rgba(10,0,20,0.9); backdrop-filter:blur(6px);
-      padding:14px; z-index:999; display:flex; justify-content:center; gap:40px; border-bottom:1px solid #4a0080;
+      position:fixed; top:0; left:0; right:0; background:rgba(10,0,20,0.92); backdrop-filter:blur(8px);
+      padding:14px; z-index:999; display:flex; justify-content:center; gap:50px; border-bottom:1px solid #4a0080;
     }
     nav a {
-      color:#b080ff; text-decoration:none; font-size:1.3rem; padding:8px 16px; border-radius:4px; transition:0.3s;
+      color:#b080ff; text-decoration:none; font-size:1.35rem; padding:10px 20px; border-radius:6px; transition:0.3s;
+      cursor:pointer; user-select:none;
     }
-    nav a:hover { background:#4a0080; color:#fff; }
-    section {
-      padding:100px 30px 60px; max-width:1100px; margin:0 auto;
+    nav a.active, nav a:hover { background:#4a0080; color:#fff; box-shadow:0 0 15px #8b00ff66; }
+    .frame {
+      display:none; padding:100px 30px 100px; max-width:1200px; margin:0 auto;
     }
+    .frame.active { display:block; }
     .header {
-      font-size:2.8rem; color:#c060ff; text-shadow:0 0 15px #a040ff; margin-bottom:30px; text-align:center;
+      font-size:3rem; color:#c060ff; text-shadow:0 0 20px #a040ff; margin-bottom:35px; text-align:center;
     }
     .p-violet {
-      font-size:18rem; color:transparent; margin:0 auto 40px; display:block; width:fit-content;
-      background: linear-gradient(90deg, #8b00ff, #d000ff, #8b00ff); background-size:200% 200%;
-      -webkit-background-clip:text; background-clip:text; animation: gradientFlow 8s ease infinite;
+      font-size:20rem; color:transparent; margin:0 auto 50px; display:block; width:fit-content;
+      background: linear-gradient(90deg, #8b00ff, #d000ff, #8b00ff); background-size:300% 300%;
+      -webkit-background-clip:text; background-clip:text; animation: gradientFlow 12s ease infinite;
     }
     @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
     .card {
-      background:rgba(20,0,40,0.6); border:1px solid #4a0080; border-radius:8px; padding:25px; margin:30px 0;
-      box-shadow:0 0 25px rgba(138,43,226,0.2);
+      background:rgba(20,0,40,0.65); border:1px solid #4a0080; border-radius:10px; padding:30px; margin:35px 0;
+      box-shadow:0 0 30px rgba(138,43,226,0.25);
     }
     .scripts-grid {
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:25px; margin:40px 0;
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:30px; margin:50px 0;
     }
     .script-item {
-      background:rgba(30,10,60,0.5); border:1px solid #6a00ff44; border-radius:6px; overflow:hidden;
-      transition:0.3s;
+      background:rgba(30,10,60,0.55); border:1px solid #6a00ff55; border-radius:8px; overflow:hidden;
+      transition:0.4s;
     }
-    .script-item:hover { transform:translateY(-6px); box-shadow:0 10px 30px rgba(138,43,226,0.4); }
+    .script-item:hover { transform:translateY(-8px); box-shadow:0 12px 40px rgba(138,43,226,0.5); }
     .script-item img {
-      width:100%; height:160px; object-fit:cover; border-bottom:2px solid #8b00ff;
+      width:100%; height:180px; object-fit:cover; border-bottom:3px solid #8b00ff;
     }
-    .script-item div { padding:15px; }
+    .script-item div { padding:18px; font-size:1.1rem; }
     .discord-link {
       color:#c060ff; font-weight:bold; text-decoration:none; border-bottom:2px solid #c060ff; transition:0.3s;
     }
     .discord-link:hover { color:#fff; border-color:#fff; }
     .audio-controls {
-      position:fixed; bottom:20px; right:20px; z-index:1000;
+      position:fixed; bottom:25px; right:25px; z-index:1000;
     }
     .audio-btn {
-      background:#4a0080; color:#d0a0ff; border:none; padding:12px 18px; border-radius:50%; cursor:pointer;
-      font-size:1.1rem; box-shadow:0 0 15px #8b00ff66;
+      background:#4a0080; color:#d0a0ff; border:none; padding:14px 20px; border-radius:50%; cursor:pointer;
+      font-size:1.2rem; box-shadow:0 0 20px #8b00ff88;
     }
     .audio-btn:hover { background:#6a00ff; }
   </style>
@@ -62,82 +64,83 @@
 <body>
 
 <nav>
-  <a href="#accueil">Accueil</a>
-  <a href="#help">Help / Join</a>
-  <a href="#scripts-public">Scripts Publics</a>
-  <a href="#polak-scripts">PolakOnTop Scripts</a>
+  <a data-frame="accueil" class="active">Accueil</a>
+  <a data-frame="help">Help / Join</a>
+  <a data-frame="scripts-public">Scripts Publics</a>
+  <a data-frame="polak-scripts">PolakOnTop Scripts</a>
 </nav>
 
-<section id="accueil">
+<div id="accueil" class="frame active">
   <div class="header">POLAKONTOP DARKNET HUB</div>
   <span class="p-violet">P</span>
   <div class="card">
-    <p>Hub principal du crew PolakOnTop – leaks Roblox, lookups, exploits zero-day, darknet trades.<br>
-    Rejoins le serveur pour accès complet :<br>
+    <p>Plateforme principale du crew PolakOnTop – leaks Roblox, exploits, lookups breaches, dark pool trades.<br><br>
+    Accès complet & drops exclusifs :<br>
     <a href="https://discord.gg/xW3r7FTxc2" class="discord-link" target="_blank">https://discord.gg/xW3r7FTxc2</a><br>
-    2051 rules: pure security research – no scam, no dox.</p>
+    2051 mindset: security research only – zero scam / dox policy.</p>
   </div>
-</section>
+</div>
 
-<section id="help">
-  <div class="header">HELP – REJOINDRE & RÈGLES</div>
+<div id="help" class="frame">
+  <div class="header">HELP – REJOINDRE LE CREW</div>
   <div class="card">
-    <p>Lien direct Discord: <a href="https://discord.gg/xW3r7FTxc2" class="discord-link" target="_blank">discord.gg/xW3r7FTxc2</a></p>
-    <ul>
-      <li>#welcome → claim ton rôle hacker</li>
-      <li>#scripts → drop / demande scripts publics & privés</li>
-      <li>#lookup → partage tes breaches / pseudos finds</li>
-      <li>#polak-drops → annonces exclusifs PolakOnTop scripts</li>
-      <li>Règles 2051: research only – respect le crew</li>
+    <p>Lien serveur principal: <a href="https://discord.gg/xW3r7FTxc2" class="discord-link" target="_blank">discord.gg/xW3r7FTxc2</a></p>
+    <ul style="line-height:1.8;">
+      <li>#welcome → Présente-toi & récupère ton rôle</li>
+      <li>#scripts → Partage / demande scripts publics & privés</li>
+      <li>#lookup → Poste tes finds (pseudo → email, breach dumps...)</li>
+      <li>#polak-drops → Annonces exclusives PolakOnTop scripts</li>
+      <li>Règles strictes 2051: research éthique – respect mutuel</li>
     </ul>
   </div>
-</section>
+</div>
 
-<section id="scripts-public">
+<div id="scripts-public" class="frame">
   <div class="header">SCRIPTS PUBLICS ROBLOX</div>
   <div class="card">
-    <p>Scripts Lua publics – copy dans n’importe quel executor (Delta, Fluxus, Codex, etc.).<br>
-    Updates & versions crew-only → Discord.</p>
+    <p>Scripts Lua open – inject via Delta, Fluxus, Wave, Codex, etc.<br>
+    Meilleures versions & updates crew → Discord.</p>
   </div>
   <div class="scripts-grid">
     <div class="script-item">
       <img src="https://tr.rbxcdn.com/180d5d8f45f74d6d3a0e3c5d0e0e0e0e/768/432/Image/Png" alt="Adopt Me">
-      <div>Adopt Me – Auto Farm Pets + Trading GUI</div>
+      <div>Adopt Me – Auto Farm + Neon Trading GUI</div>
     </div>
     <div class="script-item">
       <img src="https://tr.rbxcdn.com/9b0e0e0e0e0e0e0e0e0e0e0e/768/432/Image/Png" alt="Blox Fruits">
-      <div>Blox Fruits – Auto Farm + Fruit Sniper</div>
+      <div>Blox Fruits – Auto Raid + Fruit ESP Sniper</div>
     </div>
     <div class="script-item">
-      <img src="https://tr.rbxcdn.com/e0e0e0e0e0e0e0e0e0e0e0e0/768/432/Image/Png" alt="Arsenal">
-      <div>Arsenal – Aimbot + ESP + Silent Aim</div>
+      <img src="https://tr.rbxcdn.com/e0e0e0e0e0e0e0e0e0e0e0e/768/432/Image/Png" alt="Arsenal">
+      <div>Arsenal – Aimbot + Wallhack + Silent Aim</div>
     </div>
     <div class="script-item">
-      <img src="https://tr.rbxcdn.com/f0f0f0f0f0f0f0f0f0f0f0f0/768/432/Image/Png" alt="Phantom Forces">
-      <div>Phantom Forces – No Recoil + Wallbang</div>
+      <img src="https://tr.rbxcdn.com/f0f0f0f0f0f0f0f0f0f0f0/768/432/Image/Png" alt="Phantom Forces">
+      <div>Phantom Forces – No Recoil + Infinite Ammo</div>
     </div>
     <div class="script-item">
-      <img src="https://tr.rbxcdn.com/0e0e0e0e0e0e0e0e0e0e0e0e/768/432/Image/Png" alt="Murder Mystery 2">
-      <div>Murder Mystery 2 – Godmode + ESP</div>
+      <img src="https://tr.rbxcdn.com/0e0e0e0e0e0e0e0e0e0e0e/768/432/Image/Png" alt="Murder Mystery 2">
+      <div>Murder Mystery 2 – Godmode + Knife ESP Aura</div>
     </div>
     <div class="script-item">
       <img src="https://tr.rbxcdn.com/1e1e1e1e1e1e1e1e1e1e1e1e/768/432/Image/Png" alt="Da Hood">
-      <div>Da Hood – Cash Auto-Farm + Fly</div>
+      <div>Da Hood – Cash Farm + Fly + Speed</div>
     </div>
   </div>
-  <div class="card" style="text-align:center;">
-    <p>Liens réels & updates → <a href="https://discord.gg/xW3r7FTxc2" class="discord-link">rejoins le Discord</a></p>
+  <div class="card" style="text-align:center; margin-top:50px;">
+    <p>Liens réels, obfuscated versions & anti-ban → <a href="https://discord.gg/xW3r7FTxc2" class="discord-link">Rejoins Discord</a></p>
   </div>
-</section>
+</div>
 
-<section id="polak-scripts">
+<div id="polak-scripts" class="frame">
   <div class="header">POLAKONTOP SCRIPTS</div>
   <div class="card">
-    <p class="blink" style="color:#ff4080; font-size:1.6rem;">SOON – DROP IMMINENT</p>
-    <p>Custom zero-days, multi-game exploits, integrated Discord lookup.<br>
-    Beta access exclusif via <a href="https://discord.gg/xW3r7FTxc2" class="discord-link">discord.gg/xW3r7FTxc2</a></p>
+    <p style="color:#ff4080; font-size:1.8rem; text-align:center;" class="blink">SOON – FIRST DROP WITHIN DAYS</p>
+    <p>Exploits custom multi-jeux, zero-days Roblox 2026 meta, lookup intégré Discord crew.<br><br>
+    Accès beta exclusif uniquement via :<br>
+    <a href="https://discord.gg/xW3r7FTxc2" class="discord-link">discord.gg/xW3r7FTxc2</a></p>
   </div>
-</section>
+</div>
 
 <div class="audio-controls">
   <button class="audio-btn" id="muteBtn">🔇 Mute</button>
@@ -149,27 +152,59 @@
   frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
 <script>
+  // Frame switch
+  const links = document.querySelectorAll('nav a');
+  const frames = document.querySelectorAll('.frame');
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      links.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+
+      frames.forEach(f => f.classList.remove('active'));
+      document.getElementById(link.dataset.frame).classList.add('active');
+    });
+  });
+
+  // Audio – auto + clic fallback
   const player = document.getElementById('bgMusic').contentWindow;
   const muteBtn = document.getElementById('muteBtn');
-  let volume = 0;
+  let vol = 0;
+  let audioStarted = false;
 
-  // Fade in audio (start muted → progressive volume)
-  setTimeout(() => {
-    const fadeIn = setInterval(() => {
-      volume += 0.05;
-      if (volume >= 0.6) {
-        volume = 0.6;
-        clearInterval(fadeIn);
+  function startFadeIn() {
+    if (audioStarted) return;
+    audioStarted = true;
+
+    player.postMessage(JSON.stringify({
+      event: 'command',
+      func: 'playVideo',
+      args: []
+    }), '*');
+
+    const fade = setInterval(() => {
+      vol += 0.08;
+      if (vol >= 0.75) {
+        vol = 0.75;
+        clearInterval(fade);
       }
       player.postMessage(JSON.stringify({
         event: 'command',
         func: 'setVolume',
-        args: [Math.round(volume * 100)]
+        args: [Math.round(vol * 100)]
       }), '*');
-    }, 400);
-  }, 2000);
+    }, 280);
+  }
 
-  // Mute / Unmute toggle
+  // Try auto-play après un petit délai
+  setTimeout(startFadeIn, 1200);
+
+  // Fallback clic si auto bloqué
+  document.body.addEventListener('click', () => {
+    if (!audioStarted) startFadeIn();
+  }, { passive: true });
+
+  // Mute toggle
   muteBtn.onclick = () => {
     if (muteBtn.textContent.includes('Mute')) {
       player.postMessage(JSON.stringify({event:'command',func:'mute',args:[]}), '*');
@@ -179,14 +214,6 @@
       muteBtn.textContent = '🔇 Mute';
     }
   };
-
-  // Smooth scroll nav
-  document.querySelectorAll('nav a').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-    });
-  });
 </script>
 
 </body>
