@@ -3,119 +3,190 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PolakOnTop // DARKNET PANEL v2051</title>
+  <title>PolakOnTop // DARKNET HUB 2051</title>
   <style>
     body {
-      margin:0; padding:0; height:100vh; background:#000; color:#0f0; font-family:'Courier New',monospace;
-      overflow:auto; image-rendering:pixelated; background:#0a0a0a;
-      background-image: 
-        linear-gradient(rgba(0,255,0,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,0,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
+      margin:0; padding:0; min-height:100vh; background:#0a0015; color:#d0a0ff;
+      font-family:'Courier New',monospace; overflow-y:scroll; scroll-behavior:smooth;
     }
-    nav { 
-      position:fixed; top:0; left:0; right:0; background:#111; padding:10px; z-index:100;
-      display:flex; justify-content:center; gap:20px;
+    nav {
+      position:fixed; top:0; left:0; right:0; background:rgba(10,0,20,0.9); backdrop-filter:blur(6px);
+      padding:14px; z-index:999; display:flex; justify-content:center; gap:40px; border-bottom:1px solid #4a0080;
     }
-    nav a { color:#00ff41; text-decoration:none; font-size:1.2rem; }
-    nav a:hover { color:#ff0044; }
-    section { padding:80px 20px 20px; min-height:100vh; }
-    .header { color:#0f0; font-size:2.2rem; margin-bottom:20px; }
-    .glitch { 
-      color:#0f0; text-shadow: 2px 0 #f0f, -2px 0 #0ff;
-      animation: glitch-skew 4s infinite;
+    nav a {
+      color:#b080ff; text-decoration:none; font-size:1.3rem; padding:8px 16px; border-radius:4px; transition:0.3s;
     }
-    .lookup { margin:20px 0; color:#00ff41; }
-    .input { color:#00ff9d; }
-    .result { color:#ff0044; }
-    .blink { animation:blink 0.8s infinite; }
-    .scanline {
-      position:fixed; inset:0; pointer-events:none;
-      background: linear-gradient(transparent 50%, rgba(0,255,0,0.08) 50%);
-      background-size:100% 4px; animation:scan 8s linear infinite;
-      opacity:0.4;
+    nav a:hover { background:#4a0080; color:#fff; }
+    section {
+      padding:100px 30px 60px; max-width:1100px; margin:0 auto;
+    }
+    .header {
+      font-size:2.8rem; color:#c060ff; text-shadow:0 0 15px #a040ff; margin-bottom:30px; text-align:center;
     }
     .p-violet {
-      font-size:15rem; color:transparent; margin:0 auto; display:block; width:fit-content;
-      background: linear-gradient(90deg, #8b00ff, #ff00ff, #8b00ff);
-      -webkit-background-clip: text; background-clip: text;
-      animation: glitch-skew 2s infinite;
+      font-size:18rem; color:transparent; margin:0 auto 40px; display:block; width:fit-content;
+      background: linear-gradient(90deg, #8b00ff, #d000ff, #8b00ff); background-size:200% 200%;
+      -webkit-background-clip:text; background-clip:text; animation: gradientFlow 8s ease infinite;
     }
-    .scripts-list { list-style:none; padding:0; }
-    .scripts-list li { margin:10px 0; }
-    .scripts-list a { color:#00ff9d; text-decoration:none; }
-    .discord-link { color:#ff00aa; font-weight:bold; }
-
-    @keyframes blink { 50% { opacity:0; } }
-    @keyframes scan { 0% { transform:translateY(-100%); } 100% { transform:translateY(100%); } }
-    @keyframes glitch-skew {
-      0%,100% { transform:skew(0deg); }
-      10% { transform:skew(2deg); }
-      20% { transform:skew(-2deg); }
+    @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .card {
+      background:rgba(20,0,40,0.6); border:1px solid #4a0080; border-radius:8px; padding:25px; margin:30px 0;
+      box-shadow:0 0 25px rgba(138,43,226,0.2);
     }
+    .scripts-grid {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:25px; margin:40px 0;
+    }
+    .script-item {
+      background:rgba(30,10,60,0.5); border:1px solid #6a00ff44; border-radius:6px; overflow:hidden;
+      transition:0.3s;
+    }
+    .script-item:hover { transform:translateY(-6px); box-shadow:0 10px 30px rgba(138,43,226,0.4); }
+    .script-item img {
+      width:100%; height:160px; object-fit:cover; border-bottom:2px solid #8b00ff;
+    }
+    .script-item div { padding:15px; }
+    .discord-link {
+      color:#c060ff; font-weight:bold; text-decoration:none; border-bottom:2px solid #c060ff; transition:0.3s;
+    }
+    .discord-link:hover { color:#fff; border-color:#fff; }
+    .audio-controls {
+      position:fixed; bottom:20px; right:20px; z-index:1000;
+    }
+    .audio-btn {
+      background:#4a0080; color:#d0a0ff; border:none; padding:12px 18px; border-radius:50%; cursor:pointer;
+      font-size:1.1rem; box-shadow:0 0 15px #8b00ff66;
+    }
+    .audio-btn:hover { background:#6a00ff; }
   </style>
 </head>
 <body>
 
-<div class="scanline"></div>
-
 <nav>
   <a href="#accueil">Accueil</a>
-  <a href="#help">Help</a>
+  <a href="#help">Help / Join</a>
   <a href="#scripts-public">Scripts Publics</a>
   <a href="#polak-scripts">PolakOnTop Scripts</a>
 </nav>
 
 <section id="accueil">
-  <div class="header">[ POLAKONTOP PANEL // CREW ACCESS ]</div>
-  <span class="glitch p-violet">P</span>
-  <p class="lookup">Bienvenue dans le darknet hub de PolakOnTop. Rejoins le crew Discord pour leaks exclusifs, drops de scripts Roblox & collabs blackhat. <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">discord.gg/xW3r7FTxc2</a></span> – 420+ membres actifs, channels pour trades, exploits & more.</p>
+  <div class="header">POLAKONTOP DARKNET HUB</div>
+  <span class="p-violet">P</span>
+  <div class="card">
+    <p>Hub principal du crew PolakOnTop – leaks Roblox, lookups, exploits zero-day, darknet trades.<br>
+    Rejoins le serveur pour accès complet :<br>
+    <a href="https://discord.gg/xW3r7FTxc2" class="discord-link" target="_blank">https://discord.gg/xW3r7FTxc2</a><br>
+    2051 rules: pure security research – no scam, no dox.</p>
+  </div>
 </section>
 
 <section id="help">
-  <div class="header">[ HELP // JOIN & RULES ]</div>
-  <p class="lookup">Lien serveur Discord: <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">https://discord.gg/xW3r7FTxc2</a></span></p>
-  <p>Sur le serveur: 
-    - #welcome: Présente-toi & claim ton role hacker.
-    - #scripts: Drop tes scripts Roblox publics ou demande des leaks.
-    - #lookup: Partage tes finds de pseudos/emails via breaches.
-    - #rules: No dox, no scam – pure security research 2051 style.
-    - Rejoins pour early access à PolakOnTop scripts exclusifs.</p>
+  <div class="header">HELP – REJOINDRE & RÈGLES</div>
+  <div class="card">
+    <p>Lien direct Discord: <a href="https://discord.gg/xW3r7FTxc2" class="discord-link" target="_blank">discord.gg/xW3r7FTxc2</a></p>
+    <ul>
+      <li>#welcome → claim ton rôle hacker</li>
+      <li>#scripts → drop / demande scripts publics & privés</li>
+      <li>#lookup → partage tes breaches / pseudos finds</li>
+      <li>#polak-drops → annonces exclusifs PolakOnTop scripts</li>
+      <li>Règles 2051: research only – respect le crew</li>
+    </ul>
+  </div>
 </section>
 
 <section id="scripts-public">
-  <div class="header">[ SCRIPTS PUBLICS // ROBLOX LEAKS ]</div>
-  <p class="lookup">Liste de scripts Lua publics pour jeux connus. Copy-paste dans executor (Krnl, Synapse, etc.). Liés au Discord pour updates crew-only.</p>
-  <ul class="scripts-list">
-    <li>Adopt Me: <a href="https://pastebin.com/raw/abc123" target="_blank">Auto Farm Pets</a> – Farm infini, no ban risk.</li>
-    <li>Arsenal: <a href="https://pastebin.com/raw/def456" target="_blank">Aimbot + ESP</a> – Wallhack & silent aim.</li>
-    <li>Blox Fruits: <a href="https://pastebin.com/raw/ghi789" target="_blank">Auto Raid + Fruit Finder</a> – Max level fast.</li>
-    <li>Phantom Forces: <a href="https://pastebin.com/raw/jkl012" target="_blank">Infinite Ammo + No Recoil</a> – Domine les matches.</li>
-    <li>Murder Mystery 2: <a href="https://pastebin.com/raw/mno345" target="_blank">God Mode + Knife Aura</a> – Invincible sheriff.</li>
-    <li>Da Hood: <a href="https://pastebin.com/raw/pqr678" target="_blank">Cash Farm + Speed Hack</a> – Rich en 5min.</li>
-    <li>Doors: <a href="https://pastebin.com/raw/stu901" target="_blank">Entity ESP + NoClip</a> – Bypass horror.</li>
-    <li>Pet Simulator X: <a href="https://pastebin.com/raw/vwx234" target="_blank">Dupe Pets + Auto Hatch</a> – OP pets free.</li>
-    <li>Shindo Life: <a href="https://pastebin.com/raw/yzab567" target="_blank">Auto Spin + KG Farm</a> – Rare KG instant.</li>
-    <li>Jailbreak: <a href="https://pastebin.com/raw/cde890" target="_blank">Infinite Nitro + Teleport</a> – Escape pro.</li>
-    <!-- Ajoute + si tu veux, remplace liens par vrais pastebin publics -->
-  </ul>
-  <p>Plus de scripts? Rejoins Discord <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">ici</a></span> pour shares crew.</p>
+  <div class="header">SCRIPTS PUBLICS ROBLOX</div>
+  <div class="card">
+    <p>Scripts Lua publics – copy dans n’importe quel executor (Delta, Fluxus, Codex, etc.).<br>
+    Updates & versions crew-only → Discord.</p>
+  </div>
+  <div class="scripts-grid">
+    <div class="script-item">
+      <img src="https://tr.rbxcdn.com/180d5d8f45f74d6d3a0e3c5d0e0e0e0e/768/432/Image/Png" alt="Adopt Me">
+      <div>Adopt Me – Auto Farm Pets + Trading GUI</div>
+    </div>
+    <div class="script-item">
+      <img src="https://tr.rbxcdn.com/9b0e0e0e0e0e0e0e0e0e0e0e/768/432/Image/Png" alt="Blox Fruits">
+      <div>Blox Fruits – Auto Farm + Fruit Sniper</div>
+    </div>
+    <div class="script-item">
+      <img src="https://tr.rbxcdn.com/e0e0e0e0e0e0e0e0e0e0e0e0/768/432/Image/Png" alt="Arsenal">
+      <div>Arsenal – Aimbot + ESP + Silent Aim</div>
+    </div>
+    <div class="script-item">
+      <img src="https://tr.rbxcdn.com/f0f0f0f0f0f0f0f0f0f0f0f0/768/432/Image/Png" alt="Phantom Forces">
+      <div>Phantom Forces – No Recoil + Wallbang</div>
+    </div>
+    <div class="script-item">
+      <img src="https://tr.rbxcdn.com/0e0e0e0e0e0e0e0e0e0e0e0e/768/432/Image/Png" alt="Murder Mystery 2">
+      <div>Murder Mystery 2 – Godmode + ESP</div>
+    </div>
+    <div class="script-item">
+      <img src="https://tr.rbxcdn.com/1e1e1e1e1e1e1e1e1e1e1e1e/768/432/Image/Png" alt="Da Hood">
+      <div>Da Hood – Cash Auto-Farm + Fly</div>
+    </div>
+  </div>
+  <div class="card" style="text-align:center;">
+    <p>Liens réels & updates → <a href="https://discord.gg/xW3r7FTxc2" class="discord-link">rejoins le Discord</a></p>
+  </div>
 </section>
 
 <section id="polak-scripts">
-  <div class="header">[ POLAKONTOP SCRIPTS // EXCLUSIFS ]</div>
-  <p class="lookup blink">SOON – Drops imminents via Discord crew. Custom exploits, zero-days Roblox & more. Stay tuned.</p>
-  <p>Tease: Auto-pwn pour top jeux, integrated lookups Discord. Join <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">discord.gg/xW3r7FTxc2</a></span> pour beta access.</p>
+  <div class="header">POLAKONTOP SCRIPTS</div>
+  <div class="card">
+    <p class="blink" style="color:#ff4080; font-size:1.6rem;">SOON – DROP IMMINENT</p>
+    <p>Custom zero-days, multi-game exploits, integrated Discord lookup.<br>
+    Beta access exclusif via <a href="https://discord.gg/xW3r7FTxc2" class="discord-link">discord.gg/xW3r7FTxc2</a></p>
+  </div>
 </section>
 
+<div class="audio-controls">
+  <button class="audio-btn" id="muteBtn">🔇 Mute</button>
+</div>
+
+<iframe id="bgMusic" 
+  width="0" height="0" 
+  src="https://www.youtube.com/embed/BelOMgSe5BQ?autoplay=1&loop=1&playlist=BelOMgSe5BQ&mute=1&enablejsapi=1" 
+  frameborder="0" allow="autoplay; encrypted-media"></iframe>
+
 <script>
-// smooth scroll pour nav
-document.querySelectorAll('nav a').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  const player = document.getElementById('bgMusic').contentWindow;
+  const muteBtn = document.getElementById('muteBtn');
+  let volume = 0;
+
+  // Fade in audio (start muted → progressive volume)
+  setTimeout(() => {
+    const fadeIn = setInterval(() => {
+      volume += 0.05;
+      if (volume >= 0.6) {
+        volume = 0.6;
+        clearInterval(fadeIn);
+      }
+      player.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'setVolume',
+        args: [Math.round(volume * 100)]
+      }), '*');
+    }, 400);
+  }, 2000);
+
+  // Mute / Unmute toggle
+  muteBtn.onclick = () => {
+    if (muteBtn.textContent.includes('Mute')) {
+      player.postMessage(JSON.stringify({event:'command',func:'mute',args:[]}), '*');
+      muteBtn.textContent = '🔊 Unmute';
+    } else {
+      player.postMessage(JSON.stringify({event:'command',func:'unMute',args:[]}), '*');
+      muteBtn.textContent = '🔇 Mute';
+    }
+  };
+
+  // Smooth scroll nav
+  document.querySelectorAll('nav a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    });
   });
-});
 </script>
 
 </body>
