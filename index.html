@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Polak // ROOT ACCESS</title>
+  <title>PolakOnTop // DARKNET PANEL v2051</title>
   <style>
     body {
       margin:0; padding:0; height:100vh; background:#000; color:#0f0; font-family:'Courier New',monospace;
-      overflow:hidden; image-rendering:pixelated; background:#0a0a0a;
+      overflow:auto; image-rendering:pixelated; background:#0a0a0a;
       background-image: 
         linear-gradient(rgba(0,255,0,0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0,255,0,0.04) 1px, transparent 1px);
       background-size: 40px 40px;
     }
-    #terminal {
-      position:absolute; inset:0; padding:20px; box-sizing:border-box;
-      overflow-y:auto; white-space:pre; font-size:1.1rem; line-height:1.4;
-      animation: blink 1.2s step-end infinite;
+    nav { 
+      position:fixed; top:0; left:0; right:0; background:#111; padding:10px; z-index:100;
+      display:flex; justify-content:center; gap:20px;
     }
+    nav a { color:#00ff41; text-decoration:none; font-size:1.2rem; }
+    nav a:hover { color:#ff0044; }
+    section { padding:80px 20px 20px; min-height:100vh; }
     .header { color:#0f0; font-size:2.2rem; margin-bottom:20px; }
     .glitch { 
-      color:#0f0; text-shadow: 
-        2px 0 #f0f, -2px 0 #0ff;
+      color:#0f0; text-shadow: 2px 0 #f0f, -2px 0 #0ff;
       animation: glitch-skew 4s infinite;
     }
     .lookup { margin:20px 0; color:#00ff41; }
@@ -29,11 +30,21 @@
     .result { color:#ff0044; }
     .blink { animation:blink 0.8s infinite; }
     .scanline {
-      position:absolute; inset:0; pointer-events:none;
+      position:fixed; inset:0; pointer-events:none;
       background: linear-gradient(transparent 50%, rgba(0,255,0,0.08) 50%);
       background-size:100% 4px; animation:scan 8s linear infinite;
       opacity:0.4;
     }
+    .p-violet {
+      font-size:15rem; color:transparent; margin:0 auto; display:block; width:fit-content;
+      background: linear-gradient(90deg, #8b00ff, #ff00ff, #8b00ff);
+      -webkit-background-clip: text; background-clip: text;
+      animation: glitch-skew 2s infinite;
+    }
+    .scripts-list { list-style:none; padding:0; }
+    .scripts-list li { margin:10px 0; }
+    .scripts-list a { color:#00ff9d; text-decoration:none; }
+    .discord-link { color:#ff00aa; font-weight:bold; }
 
     @keyframes blink { 50% { opacity:0; } }
     @keyframes scan { 0% { transform:translateY(-100%); } 100% { transform:translateY(100%); } }
@@ -48,35 +59,63 @@
 
 <div class="scanline"></div>
 
-<div id="terminal">
-  <div class="header">[ POLAK ROOT // v13.37 – DARKNET NODE ACTIVE ]</div>
-  <span class="glitch">  _____           _    _    __   ___  </span>
-  <span class="glitch"> |  _  |___ ___ _| |  |_|  |  | | . | </span>
-  <span class="glitch"> |   __| . |  _| . |  | |  |    | . | </span>
-  <span class="glitch"> |__|  |___|_| |___|  |_|  |__| |___| </span>
+<nav>
+  <a href="#accueil">Accueil</a>
+  <a href="#help">Help</a>
+  <a href="#scripts-public">Scripts Publics</a>
+  <a href="#polak-scripts">PolakOnTop Scripts</a>
+</nav>
 
-  <br><br>
-  <div class="lookup">[!] LOOKUP ENGINE v9.1 – BREACH COMPATIBLE</div>
-  <div> > username: <span class="input">xX_DarkPolak_Xx</span> → <span class="result">real: julien.dupont.92@gmail.com</span></div>
-  <div> > username: <span class="input">LePolakDu93</span> → <span class="result">linked: 0xPolakEth – discord: Polak#1337</span></div>
-  <div> > email: <span class="input">polak@darkpool.onion</span> → <span class="result">found in 14 dumps – password hash: $2b$12$KIX...</span></div>
-  <div> > ip: <span class="input">185.220.101.42</span> → <span class="result blink">[TOR EXIT NODE – France]</span></div>
-  <div> > pseudo: <span class="input">PolakOnTop</span> → <span class="result">rank #1 – 420.69k pwned creds</span></div>
+<section id="accueil">
+  <div class="header">[ POLAKONTOP PANEL // CREW ACCESS ]</div>
+  <span class="glitch p-violet">P</span>
+  <p class="lookup">Bienvenue dans le darknet hub de PolakOnTop. Rejoins le crew Discord pour leaks exclusifs, drops de scripts Roblox & collabs blackhat. <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">discord.gg/xW3r7FTxc2</a></span> – 420+ membres actifs, channels pour trades, exploits & more.</p>
+</section>
 
-  <br>
-  <div class="lookup">[!] JOIN THE CREW</div>
-  <div> > discord onion mirror: <a href="https://discord.gg/xW3r7FTxc2" style="color:#ff00aa; text-decoration:none;">https://discord.gg/xW3r7FTxc2</a> <span class="blink">[LIVE 420 users]</span></div>
+<section id="help">
+  <div class="header">[ HELP // JOIN & RULES ]</div>
+  <p class="lookup">Lien serveur Discord: <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">https://discord.gg/xW3r7FTxc2</a></span></p>
+  <p>Sur le serveur: 
+    - #welcome: Présente-toi & claim ton role hacker.
+    - #scripts: Drop tes scripts Roblox publics ou demande des leaks.
+    - #lookup: Partage tes finds de pseudos/emails via breaches.
+    - #rules: No dox, no scam – pure security research 2051 style.
+    - Rejoins pour early access à PolakOnTop scripts exclusifs.</p>
+</section>
 
-  <br><br>
-  <span class="blink">C:\polak\root> _</span>
-</div>
+<section id="scripts-public">
+  <div class="header">[ SCRIPTS PUBLICS // ROBLOX LEAKS ]</div>
+  <p class="lookup">Liste de scripts Lua publics pour jeux connus. Copy-paste dans executor (Krnl, Synapse, etc.). Liés au Discord pour updates crew-only.</p>
+  <ul class="scripts-list">
+    <li>Adopt Me: <a href="https://pastebin.com/raw/abc123" target="_blank">Auto Farm Pets</a> – Farm infini, no ban risk.</li>
+    <li>Arsenal: <a href="https://pastebin.com/raw/def456" target="_blank">Aimbot + ESP</a> – Wallhack & silent aim.</li>
+    <li>Blox Fruits: <a href="https://pastebin.com/raw/ghi789" target="_blank">Auto Raid + Fruit Finder</a> – Max level fast.</li>
+    <li>Phantom Forces: <a href="https://pastebin.com/raw/jkl012" target="_blank">Infinite Ammo + No Recoil</a> – Domine les matches.</li>
+    <li>Murder Mystery 2: <a href="https://pastebin.com/raw/mno345" target="_blank">God Mode + Knife Aura</a> – Invincible sheriff.</li>
+    <li>Da Hood: <a href="https://pastebin.com/raw/pqr678" target="_blank">Cash Farm + Speed Hack</a> – Rich en 5min.</li>
+    <li>Doors: <a href="https://pastebin.com/raw/stu901" target="_blank">Entity ESP + NoClip</a> – Bypass horror.</li>
+    <li>Pet Simulator X: <a href="https://pastebin.com/raw/vwx234" target="_blank">Dupe Pets + Auto Hatch</a> – OP pets free.</li>
+    <li>Shindo Life: <a href="https://pastebin.com/raw/yzab567" target="_blank">Auto Spin + KG Farm</a> – Rare KG instant.</li>
+    <li>Jailbreak: <a href="https://pastebin.com/raw/cde890" target="_blank">Infinite Nitro + Teleport</a> – Escape pro.</li>
+    <!-- Ajoute + si tu veux, remplace liens par vrais pastebin publics -->
+  </ul>
+  <p>Plus de scripts? Rejoins Discord <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">ici</a></span> pour shares crew.</p>
+</section>
+
+<section id="polak-scripts">
+  <div class="header">[ POLAKONTOP SCRIPTS // EXCLUSIFS ]</div>
+  <p class="lookup blink">SOON – Drops imminents via Discord crew. Custom exploits, zero-days Roblox & more. Stay tuned.</p>
+  <p>Tease: Auto-pwn pour top jeux, integrated lookups Discord. Join <span class="discord-link"><a href="https://discord.gg/xW3r7FTxc2">discord.gg/xW3r7FTxc2</a></span> pour beta access.</p>
+</section>
 
 <script>
-// fake typing effect pour le curseur qui clignote + scroll auto
-const term = document.getElementById('terminal');
-setInterval(() => {
-  term.scrollTop = term.scrollHeight;
-}, 500);
+// smooth scroll pour nav
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
 </script>
 
 </body>
