@@ -1,94 +1,82 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PolakOnTop</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polak // ROOT ACCESS</title>
   <style>
     body {
-      margin:0; height:100vh; background:#000; color:#0f0; font-family:Arial,monospace;
-      overflow:hidden; display:flex; align-items:center; justify-content:center;
-      background: linear-gradient(black, #0a0a1f);
+      margin:0; padding:0; height:100vh; background:#000; color:#0f0; font-family:'Courier New',monospace;
+      overflow:hidden; image-rendering:pixelated; background:#0a0a0a;
+      background-image: 
+        linear-gradient(rgba(0,255,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,0,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
-    .container {
-      text-align:center; position:relative; z-index:10;
+    #terminal {
+      position:absolute; inset:0; padding:20px; box-sizing:border-box;
+      overflow-y:auto; white-space:pre; font-size:1.1rem; line-height:1.4;
+      animation: blink 1.2s step-end infinite;
     }
-    h1 {
-      font-size:9vw; margin:0; letter-spacing:0.5vw;
-      background: linear-gradient(90deg, #00ff41, #00b7ff, #ff00aa, #00ff41);
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent; animation: glitch 4s infinite;
+    .header { color:#0f0; font-size:2.2rem; margin-bottom:20px; }
+    .glitch { 
+      color:#0f0; text-shadow: 
+        2px 0 #f0f, -2px 0 #0ff;
+      animation: glitch-skew 4s infinite;
     }
-    @keyframes glitch {
-      0%,100% { transform: translate(0); }
-      20% { transform: translate(-4px, 4px); }
-      40% { transform: translate(4px, -4px); }
-      60% { transform: translate(-4px, 0); }
-      80% { transform: translate(4px, 4px); }
+    .lookup { margin:20px 0; color:#00ff41; }
+    .input { color:#00ff9d; }
+    .result { color:#ff0044; }
+    .blink { animation:blink 0.8s infinite; }
+    .scanline {
+      position:absolute; inset:0; pointer-events:none;
+      background: linear-gradient(transparent 50%, rgba(0,255,0,0.08) 50%);
+      background-size:100% 4px; animation:scan 8s linear infinite;
+      opacity:0.4;
     }
-    .discord {
-      margin-top:40px; font-size:2rem;
+
+    @keyframes blink { 50% { opacity:0; } }
+    @keyframes scan { 0% { transform:translateY(-100%); } 100% { transform:translateY(100%); } }
+    @keyframes glitch-skew {
+      0%,100% { transform:skew(0deg); }
+      10% { transform:skew(2deg); }
+      20% { transform:skew(-2deg); }
     }
-    .discord a {
-      color:#00ff9d; text-decoration:none; border-bottom:2px solid #00ff9d;
-      transition:0.3s;
-    }
-    .discord a:hover { color:#fff; border-color:#fff; }
-    canvas { position:absolute; top:0; left:0; z-index:1; }
   </style>
 </head>
 <body>
 
-<canvas id="bg"></canvas>
+<div class="scanline"></div>
 
-<div class="container">
-  <h1>Polak</h1>
-  <div class="discord">
-    Rejoins la team → <a href="https://discord.gg/xW3r7FTxc2" target="_blank">discord.gg/xW3r7FTxc2</a>
-  </div>
+<div id="terminal">
+  <div class="header">[ POLAK ROOT // v13.37 – DARKNET NODE ACTIVE ]</div>
+  <span class="glitch">  _____           _    _    __   ___  </span>
+  <span class="glitch"> |  _  |___ ___ _| |  |_|  |  | | . | </span>
+  <span class="glitch"> |   __| . |  _| . |  | |  |    | . | </span>
+  <span class="glitch"> |__|  |___|_| |___|  |_|  |__| |___| </span>
+
+  <br><br>
+  <div class="lookup">[!] LOOKUP ENGINE v9.1 – BREACH COMPATIBLE</div>
+  <div> > username: <span class="input">xX_DarkPolak_Xx</span> → <span class="result">real: julien.dupont.92@gmail.com</span></div>
+  <div> > username: <span class="input">LePolakDu93</span> → <span class="result">linked: 0xPolakEth – discord: Polak#1337</span></div>
+  <div> > email: <span class="input">polak@darkpool.onion</span> → <span class="result">found in 14 dumps – password hash: $2b$12$KIX...</span></div>
+  <div> > ip: <span class="input">185.220.101.42</span> → <span class="result blink">[TOR EXIT NODE – France]</span></div>
+  <div> > pseudo: <span class="input">PolakOnTop</span> → <span class="result">rank #1 – 420.69k pwned creds</span></div>
+
+  <br>
+  <div class="lookup">[!] JOIN THE CREW</div>
+  <div> > discord onion mirror: <a href="https://discord.gg/xW3r7FTxc2" style="color:#ff00aa; text-decoration:none;">https://discord.gg/xW3r7FTxc2</a> <span class="blink">[LIVE 420 users]</span></div>
+
+  <br><br>
+  <span class="blink">C:\polak\root> _</span>
 </div>
 
 <script>
-// fond particules simple (optionnel mais stylé)
-const canvas = document.getElementById('bg');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-for(let i=0; i<80; i++){
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    vx: (Math.random()-0.5)*1.2,
-    vy: (Math.random()-0.5)*1.2,
-    radius: Math.random()*2+1
-  });
-}
-
-function animate(){
-  ctx.fillStyle = 'rgba(0,0,0,0.05)';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  
-  particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    if(p.x<0||p.x>canvas.width) p.vx*=-1;
-    if(p.y<0||p.y>canvas.height) p.vy*=-1;
-    
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
-    ctx.fillStyle = '#00ff4144';
-    ctx.fill();
-  });
-  requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener('resize',()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+// fake typing effect pour le curseur qui clignote + scroll auto
+const term = document.getElementById('terminal');
+setInterval(() => {
+  term.scrollTop = term.scrollHeight;
+}, 500);
 </script>
 
 </body>
